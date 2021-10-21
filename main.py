@@ -122,9 +122,7 @@ class Api_data:
         json_dict = json.loads(str_dict)
         return (json_dict['all_ages']['full'])
 
-
-
-    def dict_percentage(self):
+    def dict_data(self):
         firebaseconfig = {
             "apiKey": "AIzaSyB-5Z1fz9rsfVhxCLcSQ1n4hfFdBhYmW1c",
             "authDomain": "vaxibase.firebaseapp.com",
@@ -136,21 +134,18 @@ class Api_data:
 
         firebase = pyrebase.initialize_app(firebaseconfig)
         db = firebase.database()
-
-        data= {"quebec": self.data_quebec_api(),
-               "ontario": self.data_ontario_api(),
-               "alberta": self.data_alberta_api(),
-               "Britsh coloumbie": self.data_colombie_api(),
-               "saskatchewan": self.data_saskatoun_api(),
-               "Manitoba": self.data_manitoba_api(),
-               "Yukon": self.data_yt_api(),
-               "New Brunswick": self.data_nb_api(),
-               "Newfoundland and Labrador": self.data_nl_api(),
-               "Prince Edward Island": self.data_pe_api(),
-               "Nunavute": self.data_nu_api(),
-               "Nova Scotia" : self.data_ns_api()}
+        data = {"quebec": self.data_quebec_api(),
+                "ontario": self.data_ontario_api(),
+                "alberta": self.data_alberta_api(),
+                "Britsh coloumbie": self.data_colombie_api(),
+                "saskatchewan": self.data_saskatoun_api(),
+                "Manitoba": self.data_manitoba_api(),
+                "Yukon": self.data_yt_api(),
+                "New Brunswick": self.data_nb_api(),
+                "Newfoundland and Labrador": self.data_nl_api(),
+                "Prince Edward Island": self.data_pe_api(),
+                "Nunavute": self.data_nu_api(),
+                "Nova Scotia": self.data_ns_api()}
 
         db.push(data)
-        #print(data)
         return data
-
