@@ -1,17 +1,17 @@
 import requests
-import json
 import pyrebase
-from firebase_admin import db
-
 
 class Api_data:
 
-    def api_request_province(self,province_code):
+    BASE_URL = 'https://api.covid19tracker.ca/'
+    BASE_URL_REPORTS = BASE_URL + 'reports/'
+    BASE_URL_REPORTS_PROVINCE = BASE_URL_REPORTS + 'province/'
 
-        url = 'https://api.covid19tracker.ca/vaccines/age-groups/province/'+province_code
+    def province_url(self,province_code):
+        url = Api_data.BASE_URL_REPORTS_PROVINCE + province_code
         return(url)
 
-    def population_province(self,province_code):
+    def population_province_api(self,province_code):
         sessionpop = requests.Session()
         urlpopulation = 'https://api.covid19tracker.ca/provinces'
 
@@ -23,106 +23,108 @@ class Api_data:
 
         return(str_dictPopulation[map_province[province_code]]['population'])
 
-    def data_ontario_api(self):
+    def data_on_api(self):
         session = requests.Session()
-        response = session.get(self.api_request_province('on'), params=None)
-        str_dict = response.json()['data'][-1::][0]['data']
-        json_dict = json.loads(str_dict)
-        return((json_dict['Ontario_12plus']['full'] / self.population_province('ON')) * 100)
+        response = session.get(self.province_url('qc'), params=None)
+        str_dict = response.json()['data'][-1::][0]
+        return ((str_dict['total_vaccinated'] / self.population_province_api('QC')) * 100)
 
-    def data_quebec_api(self):
+    def data_qc_api(self):
         session = requests.Session()
-        response = session.get(self.api_request_province('qc'), params=None)
-        str_dict = response.json()['data'][-1::][0]['data']
-        json_dict = json.loads(str_dict)
-        return ((json_dict['all_ages']['full'] / self.population_province('QC')) * 100)
+        response = session.get(self.province_url('qc'), params=None)
+        str_dict = response.json()['data'][-1::][0]
+        return ((str_dict['total_vaccinated'] / self.population_province_api('QC')) * 100)
 
-    def data_alberta_api(self):
+    def data_ab_api(self):
         session = requests.Session()
-        response = session.get(self.api_request_province('ab'), params=None)
-        str_dict = response.json()['data'][-1::][0]['data']
-        json_dict = json.loads(str_dict)
-        return ((json_dict['all_ages']['full'] / self.population_province('AB')) * 100)
+        response = session.get(self.province_url('ab'), params=None)
+        str_dict = response.json()['data'][-1::][0]
+        return ((str_dict['total_vaccinated'] / self.population_province_api('AB')) * 100)
 
-    def data_saskatoun_api(self):
+    def data_sk_api(self):
         session = requests.Session()
-        response = session.get(self.api_request_province('sk'), params=None)
-        str_dict = response.json()['data'][-1::][0]['data']
-        json_dict = json.loads(str_dict)
-        return ((json_dict['all_ages']['full'] / self.population_province('SK')) * 100)
+        response = session.get(self.province_url('sk'), params=None)
+        str_dict = response.json()['data'][-1::][0]
+        return ((str_dict['total_vaccinated'] / self.population_province_api('SK')) * 100)
 
-    def data_colombie_api(self):
+    def data_bc_api(self):
         session = requests.Session()
-        response = session.get(self.api_request_province('bc'), params=None)
-        str_dict = response.json()['data'][-1::][0]['data']
-        json_dict = json.loads(str_dict)
-        return((json_dict['all_ages']['full'] / self.population_province('BC')) * 100)
+        response = session.get(self.province_url('bc'), params=None)
+        str_dict = response.json()['data'][-1::][0]
+        return((str_dict['total_vaccinated'] / self.population_province_api('BC')) * 100)
 
     def data_nb_api(self):
         session = requests.Session()
-        response = session.get(self.api_request_province('nb'), params=None)
-        str_dict = response.json()['data'][-1::][0]['data']
-        json_dict = json.loads(str_dict)
-        return ((json_dict['all_ages']['full'] / self.population_province('NB')) * 100)
+        response = session.get(self.province_url('nb'), params=None)
+        str_dict = response.json()['data'][-1::][0]
+        return ((str_dict['total_vaccinated'] / self.population_province_api('NB')) * 100)
 
     def data_nl_api(self):
         session = requests.Session()
-        response = session.get(self.api_request_province('nl'), params=None)
-        str_dict = response.json()['data'][-1::][0]['data']
-        json_dict = json.loads(str_dict)
-        return ((json_dict['all_ages']['full']/self.population_province('NL'))*100)
+        response = session.get(self.province_url('nl'), params=None)
+        str_dict = response.json()['data'][-1::][0]
+        return ((str_dict['total_vaccinated']/self.population_province_api('NL'))*100)
 
     def data_nt_api(self):
         session = requests.Session()
-        response = session.get(self.api_request_province('nt'), params=None)
-        str_dict = response.json()['data'][-1::][0]['data']
-        json_dict = json.loads(str_dict)
-        return ((json_dict['all_ages']['full']) / self.population_province('NT') * 100)
+        response = session.get(self.province_url('nt'), params=None)
+        str_dict = response.json()['data'][-1::][0]
+        return ((str_dict['total_vaccinated']) / self.population_province_api('NT') * 100)
 
     def data_ns_api(self):
         session = requests.Session()
-        response = session.get(self.api_request_province('ns'), params=None)
-        str_dict = response.json()['data'][-1::][0]['data']
-        json_dict = json.loads(str_dict)
-        return ((json_dict['all_ages']['full'] / self.population_province('NS')) * 100)
+        response = session.get(self.province_url('ns'), params=None)
+        str_dict = response.json()['data'][-1::][0]
+        return ((str_dict['total_vaccinated'] / self.population_province_api('NS')) * 100)
 
     def data_nu_api(self):
         session = requests.Session()
-        response = session.get(self.api_request_province('nu'), params=None)
-        str_dict = response.json()['data'][-1::][0]['data']
-        json_dict = json.loads(str_dict)
-        return ((json_dict['all_ages']['full'] / self.population_province('NU')) * 100)
+        response = session.get(self.province_url('nu'), params=None)
+        str_dict = response.json()['data'][-1::][0]
+        return ((str_dict['total_vaccinated'] / self.population_province_api('NU')) * 100)
 
     def data_pe_api(self):
         session = requests.Session()
-        response = session.get(self.api_request_province('pe'), params=None)
-        str_dict = response.json()['data'][-1::][0]['data']
-        json_dict = json.loads(str_dict)
-        return ((json_dict['all_ages']['full'] / self.population_province('PE')) * 100)
+        response = session.get(self.province_url('pe'), params=None)
+        str_dict = response.json()['data'][-1::][0]
+        return ((str_dict['total_vaccinated'] / self.population_province_api('PE')) * 100)
 
     def data_yt_api(self):
         session = requests.Session()
-        response = session.get(self.api_request_province('yt'), params=None)
-        str_dict = response.json()['data'][-1::][0]['data']
-        json_dict = json.loads(str_dict)
-        return ((json_dict['all_ages']['full'] / self.population_province('YT')) * 100)
+        response = session.get(self.province_url('yt'), params=None)
+        str_dict = response.json()['data'][-1::][0]
+        return ((str_dict['total_vaccinated'] / self.population_province_api('YT')) * 100)
 
-    def data_manitoba_api(self):
+    def data_mb_api(self):
         session = requests.Session()
-        response = session.get(self.api_request_province('mb'), params=None)
-        str_dict = response.json()['data'][-1::][0]['data']
-        json_dict = json.loads(str_dict)
-        return ((json_dict['all_ages']['full'] / self.population_province('MB')) * 100)
+        response = session.get(self.province_url('mb'), params=None)
+        str_dict = response.json()['data'][-1::][0]
+        return ((str_dict['total_vaccinated'] / self.population_province_api('MB')) * 100)
 
     def data_canada_api(self):
         session = requests.Session()
-        url = 'https://api.covid19tracker.ca/vaccines/age-groups'
+        url = Api_data.BASE_URL_REPORTS
         response = session.get(url, params=None)
-        str_dict = response.json()['data'][-1::][0]['data']
-        json_dict = json.loads(str_dict)
-        return (json_dict['all_ages']['full'])
+        str_dict = response.json()['data'][-1::][0]
+        return (str_dict['total_vaccinated'])
 
-    def dict_data(self):
+    def data_all_api(self):
+        data = {
+            "AB": self.data_ab_api(),
+            "BC": self.data_bc_api(),
+            "MB": self.data_mb_api(),
+            "NB": self.data_nb_api(),
+            "NL": self.data_nl_api(),
+            "NS": self.data_ns_api(),
+            "NT": self.data_nu_api(),
+            "ON": self.data_on_api(),
+            "QC": self.data_qc_api(),
+            "PE": self.data_pe_api(),
+            "SK": self.data_sk_api(),
+            "YT": self.data_yt_api()}
+        return data
+
+    def update_db(self):
         firebaseconfig = {
             "apiKey": "AIzaSyB-5Z1fz9rsfVhxCLcSQ1n4hfFdBhYmW1c",
             "authDomain": "vaxibase.firebaseapp.com",
@@ -134,18 +136,14 @@ class Api_data:
 
         firebase = pyrebase.initialize_app(firebaseconfig)
         db = firebase.database()
-        data = {"quebec": self.data_quebec_api(),
-                "ontario": self.data_ontario_api(),
-                "alberta": self.data_alberta_api(),
-                "Britsh coloumbie": self.data_colombie_api(),
-                "saskatchewan": self.data_saskatoun_api(),
-                "Manitoba": self.data_manitoba_api(),
-                "Yukon": self.data_yt_api(),
-                "New Brunswick": self.data_nb_api(),
-                "Newfoundland and Labrador": self.data_nl_api(),
-                "Prince Edward Island": self.data_pe_api(),
-                "Nunavute": self.data_nu_api(),
-                "Nova Scotia": self.data_ns_api()}
+
+        data = self.data_all_api()
 
         db.push(data)
-        return data
+
+def main():
+    api = Api_data()
+    api.update_db()
+
+if __name__ == "__main__":
+    main()
