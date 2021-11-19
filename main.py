@@ -148,4 +148,5 @@ class Api_data:
                 "Nova Scotia": self.data_ns_api()}
 
         db.push(data)
+        print(data)
         return data
