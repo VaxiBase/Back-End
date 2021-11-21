@@ -139,7 +139,8 @@ class Api_data:
 
         data = self.data_all_api()
 
-        db.push(data)
+        db.child('province_data').update(data)
+
 
 def main():
     api = Api_data()
