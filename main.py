@@ -36,14 +36,25 @@ class Api_data:
 
         return(str_dictPopulation[map_province[province_code]]['population'])
 
-    
+    def population_death(self, province_code):
+        sessionpop = requests.Session()
+        urldeath = 'https://api.covid19tracker.ca/fatalities?province='+province_code+'&per_page=1'
+
+        responsepop = sessionpop.get(urldeath, params=None)
+        str_dictPopulation = responsepop.json()
+        total_death = str_dictPopulation['total']
+        return total_death
+
+
     def data_ab(self):
         session = requests.Session()
         response = session.get(self.return_province_url('ab'), params=None)
         str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('AB')) * 100
         date = str_dict['date']
-        return Province('Alberta', date, total_vax).__dict__
+        total_hosp = str_dict['total_hospitalizations']
+        death = self.population_death('ab')
+        return Province('Alberta', date, total_vax, death, total_hosp).__dict__
 
     def data_bc(self):
         session = requests.Session()
@@ -51,7 +62,9 @@ class Api_data:
         str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('BC')) * 100
         date = str_dict['date']
-        return Province('British Columbia', date, total_vax).__dict__
+        total_hosp = str_dict['total_hospitalizations']
+        death = self.population_death('bc')
+        return Province('British Columbia', date, total_vax, death, total_hosp).__dict__
 
     def data_mb(self):
         session = requests.Session()
@@ -59,7 +72,9 @@ class Api_data:
         str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('MB')) * 100
         date = str_dict['date']
-        return Province('Manitoba', date, total_vax).__dict__
+        death = self.population_death('mb')
+        total_hosp = str_dict['total_hospitalizations']
+        return Province('Manitoba', date, total_vax, death, total_hosp).__dict__
 
     def data_nb(self):
         session = requests.Session()
@@ -67,7 +82,9 @@ class Api_data:
         str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('NB')) * 100
         date = str_dict['date']
-        return Province('New Brunswick', date, total_vax).__dict__
+        death = self.population_death('nb')
+        total_hosp = str_dict['total_hospitalizations']
+        return Province('New Brunswick', date, total_vax, death, total_hosp).__dict__
 
     def data_nl(self):
         session = requests.Session()
@@ -75,7 +92,9 @@ class Api_data:
         str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('NL')) * 100
         date = str_dict['date']
-        return Province('Newfoundland and Labrador', date, total_vax).__dict__
+        death = self.population_death('nl')
+        total_hosp = str_dict['total_hospitalizations']
+        return Province('Newfoundland and Labrador', date, total_vax, death, total_hosp).__dict__
 
     def data_ns(self):
         session = requests.Session()
@@ -83,7 +102,9 @@ class Api_data:
         str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('NS')) * 100
         date = str_dict['date']
-        return Province('Nova Scotia', date, total_vax).__dict__
+        total_hosp = str_dict['total_hospitalizations']
+        death = self.population_death('ns')
+        return Province('Nova Scotia', date, total_vax, death, total_hosp).__dict__
 
     def data_nt(self):
         session = requests.Session()
@@ -91,7 +112,9 @@ class Api_data:
         str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('NT')) * 100
         date = str_dict['date']
-        return Province('Northwest Territories', date, total_vax).__dict__
+        total_hosp = str_dict['total_hospitalizations']
+        death = self.population_death('nt')
+        return Province('Northwest Territories', date, total_vax, death, total_hosp).__dict__
 
     def data_nu(self):
         session = requests.Session()
@@ -99,16 +122,20 @@ class Api_data:
         str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('NU')) * 100
         date = str_dict['date']
-        return Province('Nunavut', date, total_vax).__dict__
+        total_hosp = str_dict['total_hospitalizations']
+        death = self.population_death('nu')
+        return Province('Nunavut', date, total_vax, death, total_hosp).__dict__
 
 
     def data_on(self):
         session = requests.Session()
-        response = session.get(self.return_province_url('qc'), params=None)
+        response = session.get(self.return_province_url('on'), params=None)
         str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('ON')) * 100
         date = str_dict['date']
-        return Province('Ontario', date, total_vax).__dict__
+        total_hosp = str_dict['total_hospitalizations']
+        death = self.population_death('on')
+        return Province('Ontario', date, total_vax, death, total_hosp).__dict__
 
 
     def data_qc(self):
@@ -117,7 +144,9 @@ class Api_data:
         str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('QC')) * 100
         date = str_dict['date']
-        return Province('Quebec', date, total_vax).__dict__
+        total_hosp = str_dict['total_hospitalizations']
+        death = self.population_death('qc')
+        return Province('Quebec', date, total_vax, death, total_hosp).__dict__
 
     def data_pe(self):
         session = requests.Session()
@@ -125,7 +154,9 @@ class Api_data:
         str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('PE')) * 100
         date = str_dict['date']
-        return Province('Prince Edward Island', date, total_vax).__dict__
+        total_hosp = str_dict['total_hospitalizations']
+        death = self.population_death('pe')
+        return Province('Prince Edward Island', date, total_vax, death, total_hosp).__dict__
 
     def data_sk(self):
         session = requests.Session()
@@ -133,7 +164,9 @@ class Api_data:
         str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('SK')) * 100
         date = str_dict['date']
-        return Province('Saskatchewan', date, total_vax).__dict__
+        total_hosp = str_dict['total_hospitalizations']
+        death = self.population_death('sk')
+        return Province('Saskatchewan', date, total_vax,death, total_hosp).__dict__
         
     def data_yt(self):
         session = requests.Session()
@@ -141,7 +174,9 @@ class Api_data:
         str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('YT')) * 100
         date = str_dict['date']
-        return Province('Yukon', date, total_vax).__dict__
+        total_hosp = str_dict['total_hospitalizations']
+        death = self.population_death('yt')
+        return Province('Yukon', date, total_vax,death, total_hosp).__dict__
 
     # def data_canada(self):
     #     session = requests.Session()
