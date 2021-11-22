@@ -2,29 +2,29 @@ import requests
 import pyrebase
 from province import Province
 
-class Api_data:
 
+class Api_data:
     BASE_URL = 'https://api.covid19tracker.ca/'
     BASE_URL_REPORTS = BASE_URL + 'reports/'
     BASE_URL_REPORTS_PROVINCE = BASE_URL_REPORTS + 'province/'
 
     firebaseconfig = {
-    "apiKey": "AIzaSyB-5Z1fz9rsfVhxCLcSQ1n4hfFdBhYmW1c",
-    "authDomain": "vaxibase.firebaseapp.com",
-    "databaseURL": "https://vaxibase-default-rtdb.firebaseio.com",
-    "projectId": "vaxibase",
-    "storageBucket": "vaxibase.appspot.com",
-    "messagingSenderId": "725075045659",
-    "appId": "1:725075045659:web:459aa09befdc1ae2f5b7be"}
+        "apiKey": "AIzaSyB-5Z1fz9rsfVhxCLcSQ1n4hfFdBhYmW1c",
+        "authDomain": "vaxibase.firebaseapp.com",
+        "databaseURL": "https://vaxibase-default-rtdb.firebaseio.com",
+        "projectId": "vaxibase",
+        "storageBucket": "vaxibase.appspot.com",
+        "messagingSenderId": "725075045659",
+        "appId": "1:725075045659:web:459aa09befdc1ae2f5b7be"}
 
     firebase = pyrebase.initialize_app(firebaseconfig)
     db = firebase.database()
 
-    def return_province_url(self,province_code):
+    def return_province_url(self, province_code):
         url = Api_data.BASE_URL_REPORTS_PROVINCE + province_code
-        return(url)
+        return (url)
 
-    def population_province(self,province_code):
+    def population_province(self, province_code):
         sessionpop = requests.Session()
         urlpopulation = 'https://api.covid19tracker.ca/provinces'
 
@@ -34,17 +34,16 @@ class Api_data:
         for index, province in enumerate(str_dictPopulation):
             map_province[province['code']] = index
 
-        return(str_dictPopulation[map_province[province_code]]['population'])
+        return (str_dictPopulation[map_province[province_code]]['population'])
 
     def population_death(self, province_code):
         sessionpop = requests.Session()
-        urldeath = 'https://api.covid19tracker.ca/fatalities?province='+province_code+'&per_page=1'
+        urldeath = 'https://api.covid19tracker.ca/fatalities?province=' + province_code + '&per_page=1'
 
         responsepop = sessionpop.get(urldeath, params=None)
         str_dictPopulation = responsepop.json()
         total_death = str_dictPopulation['total']
         return total_death
-
 
     def data_ab(self):
         session = requests.Session()
@@ -54,7 +53,7 @@ class Api_data:
         date = str_dict['date']
         total_hosp = str_dict['total_hospitalizations']
         death = self.population_death('ab')
-        booster_shots = (str_dict['total_boosters_1']/self.population_province('AB')) * 100
+        booster_shots = (str_dict['total_boosters_1'] / self.population_province('AB')) * 100
         return Province('Alberta', date, total_vax, death, total_hosp, booster_shots).__dict__
 
     def data_bc(self):
@@ -88,7 +87,7 @@ class Api_data:
         death = self.population_death('nb')
         total_hosp = str_dict['total_hospitalizations']
         booster_shots = (str_dict['total_boosters_1'] / self.population_province('NB')) * 100
-        return Province('New Brunswick', date, total_vax, death, total_hosp,booster_shots ).__dict__
+        return Province('New Brunswick', date, total_vax, death, total_hosp, booster_shots).__dict__
 
     def data_nl(self):
         session = requests.Session()
@@ -99,7 +98,7 @@ class Api_data:
         death = self.population_death('nl')
         total_hosp = str_dict['total_hospitalizations']
         booster_shots = (str_dict['total_boosters_1'] / self.population_province('NL')) * 100
-        return Province('Newfoundland and Labrador', date, total_vax, death, total_hosp,booster_shots).__dict__
+        return Province('Newfoundland and Labrador', date, total_vax, death, total_hosp, booster_shots).__dict__
 
     def data_ns(self):
         session = requests.Session()
@@ -121,7 +120,7 @@ class Api_data:
         total_hosp = str_dict['total_hospitalizations']
         death = self.population_death('nt')
         booster_shots = (str_dict['total_boosters_1'] / self.population_province('NT')) * 100
-        return Province('Northwest Territories', date, total_vax, death, total_hosp,booster_shots).__dict__
+        return Province('Northwest Territories', date, total_vax, death, total_hosp, booster_shots).__dict__
 
     def data_nu(self):
         session = requests.Session()
@@ -134,7 +133,6 @@ class Api_data:
         booster_shots = (str_dict['total_boosters_1'] / self.population_province('NU')) * 100
         return Province('Nunavut', date, total_vax, death, total_hosp, booster_shots).__dict__
 
-
     def data_on(self):
         session = requests.Session()
         response = session.get(self.return_province_url('on'), params=None)
@@ -146,7 +144,6 @@ class Api_data:
         booster_shots = (str_dict['total_boosters_1'] / self.population_province('ON')) * 100
         return Province('Ontario', date, total_vax, death, total_hosp, booster_shots).__dict__
 
-
     def data_qc(self):
         session = requests.Session()
         response = session.get(self.return_province_url('qc'), params=None)
@@ -156,7 +153,7 @@ class Api_data:
         total_hosp = str_dict['total_hospitalizations']
         death = self.population_death('qc')
         booster_shots = (str_dict['total_boosters_1'] / self.population_province('QC')) * 100
-        return Province('Quebec', date, total_vax, death, total_hosp,booster_shots).__dict__
+        return Province('Quebec', date, total_vax, death, total_hosp, booster_shots).__dict__
 
     def data_pe(self):
         session = requests.Session()
@@ -178,8 +175,8 @@ class Api_data:
         total_hosp = str_dict['total_hospitalizations']
         death = self.population_death('sk')
         booster_shots = (str_dict['total_boosters_1'] / self.population_province('SK')) * 100
-        return Province('Saskatchewan', date, total_vax,death, total_hosp, booster_shots).__dict__
-        
+        return Province('Saskatchewan', date, total_vax, death, total_hosp, booster_shots).__dict__
+
     def data_yt(self):
         session = requests.Session()
         response = session.get(self.return_province_url('yt'), params=None)
@@ -189,7 +186,7 @@ class Api_data:
         total_hosp = str_dict['total_hospitalizations']
         death = self.population_death('yt')
         booster_shots = (str_dict['total_boosters_1'] / self.population_province('YT')) * 100
-        return Province('Yukon', date, total_vax,death, total_hosp, booster_shots).__dict__
+        return Province('Yukon', date, total_vax, death, total_hosp, booster_shots).__dict__
 
     # def data_canada(self):
     #     session = requests.Session()
@@ -216,7 +213,6 @@ class Api_data:
         return data
 
     def update_db(self):
-        
         data = self.data_all_dict()
 
         self.db.child('province_data').update(data)
@@ -226,5 +222,10 @@ def main():
     api = Api_data()
     api.update_db()
 
+
 if __name__ == "__main__":
     main()
+
+
+
+
