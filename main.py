@@ -40,7 +40,7 @@ class Api_data:
     def data_ab(self):
         session = requests.Session()
         response = session.get(self.return_province_url('ab'), params=None)
-        str_dict = response.json()['data'][-2::][0]
+        str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('AB')) * 100
         return Province('Alberta', str_dict['date'], total_vax, str_dict['total_vaccinations'], 
             str_dict['total_vaccinated'], str_dict['total_cases'], 
@@ -49,7 +49,7 @@ class Api_data:
     def data_bc(self):
         session = requests.Session()
         response = session.get(self.return_province_url('bc'), params=None)
-        str_dict = response.json()['data'][-2::][0]
+        str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('BC')) * 100
         return Province('British Columbia', str_dict['date'], total_vax, str_dict['total_vaccinations'], 
             str_dict['total_vaccinated'], str_dict['total_cases'], 
@@ -58,7 +58,7 @@ class Api_data:
     def data_mb(self):
         session = requests.Session()
         response = session.get(self.return_province_url('mb'), params=None)
-        str_dict = response.json()['data'][-2::][0]
+        str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('MB')) * 100
         return Province('Manitoba', str_dict['date'], total_vax, str_dict['total_vaccinations'], 
             str_dict['total_vaccinated'], str_dict['total_cases'], 
@@ -67,7 +67,7 @@ class Api_data:
     def data_nb(self):
         session = requests.Session()
         response = session.get(self.return_province_url('nb'), params=None)
-        str_dict = response.json()['data'][-2::][0]
+        str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('NB')) * 100
         return Province('New Brunswick', str_dict['date'], total_vax, str_dict['total_vaccinations'], 
             str_dict['total_vaccinated'], str_dict['total_cases'], 
@@ -76,7 +76,7 @@ class Api_data:
     def data_nl(self):
         session = requests.Session()
         response = session.get(self.return_province_url('nl'), params=None)
-        str_dict = response.json()['data'][-2::][0]
+        str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('NL')) * 100
         return Province('Newfoundland and Labrador', str_dict['date'], total_vax, str_dict['total_vaccinations'], 
             str_dict['total_vaccinated'], str_dict['total_cases'], 
@@ -85,7 +85,7 @@ class Api_data:
     def data_ns(self):
         session = requests.Session()
         response = session.get(self.return_province_url('ns'), params=None)
-        str_dict = response.json()['data'][-2::][0]
+        str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('NS')) * 100
         return Province('Nova Scotia', str_dict['date'], total_vax, str_dict['total_vaccinations'], 
             str_dict['total_vaccinated'], str_dict['total_cases'], 
@@ -94,7 +94,7 @@ class Api_data:
     def data_nt(self):
         session = requests.Session()
         response = session.get(self.return_province_url('nt'), params=None)
-        str_dict = response.json()['data'][-2::][0]
+        str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('NT')) * 100
         return Province('Northwest Territories', str_dict['date'], total_vax, str_dict['total_vaccinations'], 
             str_dict['total_vaccinated'], str_dict['total_cases'], 
@@ -103,7 +103,7 @@ class Api_data:
     def data_nu(self):
         session = requests.Session()
         response = session.get(self.return_province_url('nu'), params=None)
-        str_dict = response.json()['data'][-2::][0]
+        str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('NU')) * 100
         return Province('Nunavut', str_dict['date'], total_vax, str_dict['total_vaccinations'], 
             str_dict['total_vaccinated'], str_dict['total_cases'], 
@@ -113,7 +113,7 @@ class Api_data:
     def data_on(self):
         session = requests.Session()
         response = session.get(self.return_province_url('on'), params=None)
-        str_dict = response.json()['data'][-2::][0]
+        str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('ON')) * 100
         return Province('Ontario', str_dict['date'], total_vax, str_dict['total_vaccinations'], 
             str_dict['total_vaccinated'], str_dict['total_cases'], 
@@ -122,7 +122,7 @@ class Api_data:
     def data_qc(self):
         session = requests.Session()
         response = session.get(self.return_province_url('qc'), params=None)
-        str_dict = response.json()['data'][-2::][0]
+        str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('QC')) * 100
         return Province('Quebec', str_dict['date'], total_vax, str_dict['total_vaccinations'], 
             str_dict['total_vaccinated'], str_dict['total_cases'], 
@@ -131,7 +131,7 @@ class Api_data:
     def data_pe(self):
         session = requests.Session()
         response = session.get(self.return_province_url('pe'), params=None)
-        str_dict = response.json()['data'][-2::][0]
+        str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('PE')) * 100
         return Province('Prince Edward Island', str_dict['date'], total_vax, str_dict['total_vaccinations'], 
             str_dict['total_vaccinated'], str_dict['total_cases'], 
@@ -139,7 +139,7 @@ class Api_data:
     def data_sk(self):
         session = requests.Session()
         response = session.get(self.return_province_url('sk'), params=None)
-        str_dict = response.json()['data'][-2::][0]
+        str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('SK')) * 100
         return Province('Saskatchewan', str_dict['date'], total_vax, str_dict['total_vaccinations'], 
             str_dict['total_vaccinated'], str_dict['total_cases'], 
@@ -148,12 +148,12 @@ class Api_data:
     def data_yt(self):
         session = requests.Session()
         response = session.get(self.return_province_url('yt'), params=None)
-        str_dict = response.json()['data'][-2::][0]
+        str_dict = response.json()['data'][-1::][0]
         total_vax = (str_dict['total_vaccinated'] / self.population_province('YT')) * 100
         return Province('Yukon', str_dict['date'], total_vax, str_dict['total_vaccinations'], 
             str_dict['total_vaccinated'], str_dict['total_cases'], 
             str_dict['total_hospitalizations'], str_dict['total_fatalities']).__dict__
-            
+
     def data_all_dict(self):
         data = {
             "AB": self.data_ab(),
