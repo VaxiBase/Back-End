@@ -54,7 +54,8 @@ class Api_data:
         date = str_dict['date']
         total_hosp = str_dict['total_hospitalizations']
         death = self.population_death('ab')
-        return Province('Alberta', date, total_vax, death, total_hosp).__dict__
+        booster_shots = (str_dict['total_boosters_1']/self.population_province('AB')) * 100
+        return Province('Alberta', date, total_vax, death, total_hosp, booster_shots).__dict__
 
     def data_bc(self):
         session = requests.Session()
@@ -64,7 +65,8 @@ class Api_data:
         date = str_dict['date']
         total_hosp = str_dict['total_hospitalizations']
         death = self.population_death('bc')
-        return Province('British Columbia', date, total_vax, death, total_hosp).__dict__
+        booster_shots = (str_dict['total_boosters_1'] / self.population_province('BC')) * 100
+        return Province('British Columbia', date, total_vax, death, total_hosp, booster_shots).__dict__
 
     def data_mb(self):
         session = requests.Session()
@@ -74,7 +76,8 @@ class Api_data:
         date = str_dict['date']
         death = self.population_death('mb')
         total_hosp = str_dict['total_hospitalizations']
-        return Province('Manitoba', date, total_vax, death, total_hosp).__dict__
+        booster_shots = (str_dict['total_boosters_1'] / self.population_province('MB')) * 100
+        return Province('Manitoba', date, total_vax, death, total_hosp, booster_shots).__dict__
 
     def data_nb(self):
         session = requests.Session()
@@ -84,7 +87,8 @@ class Api_data:
         date = str_dict['date']
         death = self.population_death('nb')
         total_hosp = str_dict['total_hospitalizations']
-        return Province('New Brunswick', date, total_vax, death, total_hosp).__dict__
+        booster_shots = (str_dict['total_boosters_1'] / self.population_province('NB')) * 100
+        return Province('New Brunswick', date, total_vax, death, total_hosp,booster_shots ).__dict__
 
     def data_nl(self):
         session = requests.Session()
@@ -94,7 +98,8 @@ class Api_data:
         date = str_dict['date']
         death = self.population_death('nl')
         total_hosp = str_dict['total_hospitalizations']
-        return Province('Newfoundland and Labrador', date, total_vax, death, total_hosp).__dict__
+        booster_shots = (str_dict['total_boosters_1'] / self.population_province('NL')) * 100
+        return Province('Newfoundland and Labrador', date, total_vax, death, total_hosp,booster_shots).__dict__
 
     def data_ns(self):
         session = requests.Session()
@@ -104,7 +109,8 @@ class Api_data:
         date = str_dict['date']
         total_hosp = str_dict['total_hospitalizations']
         death = self.population_death('ns')
-        return Province('Nova Scotia', date, total_vax, death, total_hosp).__dict__
+        booster_shots = (str_dict['total_boosters_1'] / self.population_province('NS')) * 100
+        return Province('Nova Scotia', date, total_vax, death, total_hosp, booster_shots).__dict__
 
     def data_nt(self):
         session = requests.Session()
@@ -114,7 +120,8 @@ class Api_data:
         date = str_dict['date']
         total_hosp = str_dict['total_hospitalizations']
         death = self.population_death('nt')
-        return Province('Northwest Territories', date, total_vax, death, total_hosp).__dict__
+        booster_shots = (str_dict['total_boosters_1'] / self.population_province('NT')) * 100
+        return Province('Northwest Territories', date, total_vax, death, total_hosp,booster_shots).__dict__
 
     def data_nu(self):
         session = requests.Session()
@@ -124,7 +131,8 @@ class Api_data:
         date = str_dict['date']
         total_hosp = str_dict['total_hospitalizations']
         death = self.population_death('nu')
-        return Province('Nunavut', date, total_vax, death, total_hosp).__dict__
+        booster_shots = (str_dict['total_boosters_1'] / self.population_province('NU')) * 100
+        return Province('Nunavut', date, total_vax, death, total_hosp, booster_shots).__dict__
 
 
     def data_on(self):
@@ -135,7 +143,8 @@ class Api_data:
         date = str_dict['date']
         total_hosp = str_dict['total_hospitalizations']
         death = self.population_death('on')
-        return Province('Ontario', date, total_vax, death, total_hosp).__dict__
+        booster_shots = (str_dict['total_boosters_1'] / self.population_province('ON')) * 100
+        return Province('Ontario', date, total_vax, death, total_hosp, booster_shots).__dict__
 
 
     def data_qc(self):
@@ -146,7 +155,8 @@ class Api_data:
         date = str_dict['date']
         total_hosp = str_dict['total_hospitalizations']
         death = self.population_death('qc')
-        return Province('Quebec', date, total_vax, death, total_hosp).__dict__
+        booster_shots = (str_dict['total_boosters_1'] / self.population_province('QC')) * 100
+        return Province('Quebec', date, total_vax, death, total_hosp,booster_shots).__dict__
 
     def data_pe(self):
         session = requests.Session()
@@ -156,7 +166,8 @@ class Api_data:
         date = str_dict['date']
         total_hosp = str_dict['total_hospitalizations']
         death = self.population_death('pe')
-        return Province('Prince Edward Island', date, total_vax, death, total_hosp).__dict__
+        booster_shots = (str_dict['total_boosters_1'] / self.population_province('PE')) * 100
+        return Province('Prince Edward Island', date, total_vax, death, total_hosp, booster_shots).__dict__
 
     def data_sk(self):
         session = requests.Session()
@@ -166,7 +177,8 @@ class Api_data:
         date = str_dict['date']
         total_hosp = str_dict['total_hospitalizations']
         death = self.population_death('sk')
-        return Province('Saskatchewan', date, total_vax,death, total_hosp).__dict__
+        booster_shots = (str_dict['total_boosters_1'] / self.population_province('SK')) * 100
+        return Province('Saskatchewan', date, total_vax,death, total_hosp, booster_shots).__dict__
         
     def data_yt(self):
         session = requests.Session()
@@ -176,7 +188,8 @@ class Api_data:
         date = str_dict['date']
         total_hosp = str_dict['total_hospitalizations']
         death = self.population_death('yt')
-        return Province('Yukon', date, total_vax,death, total_hosp).__dict__
+        booster_shots = (str_dict['total_boosters_1'] / self.population_province('YT')) * 100
+        return Province('Yukon', date, total_vax,death, total_hosp, booster_shots).__dict__
 
     # def data_canada(self):
     #     session = requests.Session()
