@@ -238,6 +238,7 @@ def main():
     api = Api_data()
     api.update_db()
 
+    print("main.py run")
 
 if __name__ == "__main__":
     main()
